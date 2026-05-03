@@ -1,0 +1,7 @@
+.git
+.codex
+bin
+tmp
+Dockerfile
+docker-compose.yaml
+*.log

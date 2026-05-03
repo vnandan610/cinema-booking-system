@@ -1,0 +1,45 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cinema-api
+    environment:
+      PORT: "8080"
+      REDIS_ADDR: "cache:6379"
+      HOLD_TTL: "2m"
+      LOG_LEVEL: "info"
+    ports:
+      - "8080:8080"
+    depends_on:
+      cache:
+        condition: service_healthy
+
+  cache:
+    image: redis:7.4-alpine
+    container_name: cinema-cache
+    command: ["redis-server", "--appendonly", "yes"]
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    volumes:
+      - redis-data:/data
+
+  cache-admin:
+    image: ghcr.io/joeferner/redis-commander:latest
+    container_name: cinema-cache-admin
+    restart: unless-stopped
+    environment:
+      REDIS_HOSTS: "local:cache:6379"
+    ports:
+      - "8081:8081"
+    depends_on:
+      cache:
+        condition: service_healthy
+
+volumes:
+  redis-data:

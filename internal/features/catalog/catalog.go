@@ -3,7 +3,7 @@ package catalog
 import (
 	"net/http"
 
-	"github.com/sikozonpc/cinema/internal/platform/web"
+	"github.com/vnandan610/cinema-booking-system/internal/platform/web"
 )
 
 type Film struct {

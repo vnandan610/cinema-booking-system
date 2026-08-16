@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/sikozonpc/cinema/internal/platform/cache"
+	"github.com/vnandan610/cinema-booking-system/internal/platform/cache"
 )
 
 type CacheClaimBook struct {

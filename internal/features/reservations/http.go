@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/sikozonpc/cinema/internal/platform/web"
+	"github.com/vnandan610/cinema-booking-system/internal/platform/web"
 )
 
 type HTTPHandler struct {
